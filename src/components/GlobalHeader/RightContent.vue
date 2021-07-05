@@ -1,7 +1,10 @@
 <template>
   <div :class="wrpCls">
+    <span>
+      <a-icon class="bell" :style="{ fontSize: '16px'}" type="bell" />
+    </span>
     <avatar-dropdown :menu="showMenu" :current-user="currentUser" :class="prefixCls" />
-    <select-lang :class="prefixCls" />
+    <!-- <select-lang :class="prefixCls" /> -->
   </div>
 </template>
 
@@ -56,3 +59,10 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  .ant-pro-global-header-index-right {
+    .bell {
+      cursor: pointer;
+    }
+  }
+</style>

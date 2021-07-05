@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { UserLayout, BasicLayout, BlankLayout } from '@/layouts'
+import { UserLayout, BasicLayout, UserJoin, BlankLayout, PageView } from '@/layouts'
 import { bxAnaalyse } from '@/core/icons'
 
 const RouteView = {
@@ -13,9 +13,40 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/dashboard/workplace',
+    // redirect: '/dashboard/workplace',
+    redirect: '/h',
     children: [
-      // dashboard
+      {
+        path: '/h',
+        name: 'Home',
+        redirect: '/home',
+        component: RouteView,
+        hideChildrenInMenu: true,
+        meta: { title: '首页', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        children: [
+          {
+            path: '/home',
+            name: 'Home2',
+            component: () => import('@/views/home'),
+            meta: { title: '首页', hidden: true, keepAlive: true, permission: ['dashboard'] }
+          }
+        ]
+      },
+      {
+        path: '/manual',
+        name: 'Manual',
+        redirect: '/manual/permitApply',
+        component: RouteView,
+        meta: { title: '参展手册', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        children: [
+          {
+            path: '/manual/permitApply',
+            name: 'PermitApply',
+            component: () => import('@/views/manual/exhibitionApply'),
+            meta: { title: '参展证申请规定', keepAlive: false, permission: ['dashboard'] }
+          }
+        ]
+      },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -76,7 +107,7 @@ export const asyncRouterMap = [
         name: 'list',
         component: RouteView,
         redirect: '/list/table-list',
-        meta: { title: 'menu.list', icon: 'table', permission: ['table'] },
+        meta: { title: 'menu.list', icon: 'form', permission: ['table'] },
         children: [
           {
             path: '/list/table-list/:pageNo([1-9]\\d*)?',
@@ -267,27 +298,26 @@ export const asyncRouterMap = [
             ]
           }
         ]
-      }
+      },
 
       // other
-      /*
       {
         path: '/other',
         name: 'otherPage',
         component: PageView,
-        meta: { title: '其他组件', icon: 'slack', permission: [ 'dashboard' ] },
+        meta: { title: '其他组件', icon: 'slack', permission: ['dashboard'] },
         redirect: '/other/icon-selector',
         children: [
           {
             path: '/other/icon-selector',
             name: 'TestIconSelect',
             component: () => import('@/views/other/IconSelectorView'),
-            meta: { title: 'IconSelector', icon: 'tool', keepAlive: true, permission: [ 'dashboard' ] }
+            meta: { title: 'IconSelector', icon: 'tool', keepAlive: true, permission: ['dashboard'] }
           },
           {
             path: '/other/list',
             component: RouteView,
-            meta: { title: '业务布局', icon: 'layout', permission: [ 'support' ] },
+            meta: { title: '业务布局', icon: 'layout', permission: ['support'] },
             redirect: '/other/list/tree-list',
             children: [
               {
@@ -330,7 +360,6 @@ export const asyncRouterMap = [
           }
         ]
       }
-      */
     ]
   },
   {
@@ -354,7 +383,12 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login')
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login2')
+      },
+      {
+        path: 'join',
+        name: 'join',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login2')
       },
       {
         path: 'register',
@@ -370,6 +404,19 @@ export const constantRouterMap = [
         path: 'recover',
         name: 'recover',
         component: undefined
+      }
+    ]
+  },
+  {
+    path: '/user',
+    component: UserJoin,
+    redirect: '/user/join',
+    hidden: true,
+    children: [
+      {
+        path: 'join',
+        name: 'join',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login2')
       }
     ]
   },

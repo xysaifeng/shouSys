@@ -137,9 +137,9 @@ export default {
       }
 
       .main {
+        position: relative;
         min-width: 260px;
         width: 368px;
-        margin: 0 auto;
         padding: 20px;
         background: #fff;
         border: 1px solid #ddd;

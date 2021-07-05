@@ -16,7 +16,8 @@ export default {
     },
     // eslint-disable-next-line
     value: {
-      type: String
+      type: String,
+      default: 'ant-editor-wang'
     }
   },
   data () {
@@ -27,6 +28,7 @@ export default {
   },
   watch: {
     value (val) {
+      console.log(val, '------------val')
       this.editorContent = val
       this.editor.txt.html(val)
     }

@@ -8,6 +8,7 @@ module.exports = {
     '@vue/standard'
   ],
   rules: {
+   
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'generator-star-spacing': 'off',
@@ -42,12 +43,13 @@ module.exports = {
       }
     ],
     'semi': [
-      2,
+      0,
       'never',
       {
         'beforeStatementContinuationChars': 'never'
       }
     ],
+    'semi': 0,
     'no-delete-var': 2,
     'prefer-const': [
       2,
@@ -56,7 +58,9 @@ module.exports = {
       }
     ],
     'template-curly-spacing': 'off',
-    'indent': 'off'
+    'indent': 'off',
+    'space-before-function-paren': 0,
+    // 'comma-dangle': 0,
   },
   parserOptions: {
     parser: 'babel-eslint'
